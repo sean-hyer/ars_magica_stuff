@@ -17,8 +17,8 @@ Whenever decrepitude increases, reset aging points to 0
 
 import random
 import math
-
 num_tries = 10000
+modifier = 8
 
 def stress_roll():
     '''This function rolls a stress die and returns the result.
@@ -51,15 +51,15 @@ def aging(modifier):
         if aging_roll == 13 or aging_roll >= 22:
             decrepitude += 1
             aging_points = 0
-        elif aging_roll >= 10
+        elif aging_roll >= 10:
             aging_points += 1
             if aging_roll >= 18:
                 aging_points += 1
             if aging_points >= ((decrepitude + 1) * 5):
                 decrepitude += 1
                 aging_points = 0
-                
     return age
+
 
 # Right now I'm not using this.
 # It might be useful later but I'm looking at averages not distributions.
@@ -69,7 +69,7 @@ for i in range(0, 300):
 
 sum_ages = 0
 for i in range(1, num_tries):
-    result = aging(8)
+    result = aging(modifier)
     age_grid[result][1] += 1
     sum_ages += result
 
