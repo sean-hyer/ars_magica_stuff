@@ -7,6 +7,14 @@ Subtract any modifiers
 If the result is a 13 or 22+, gain a decrepitude (a point of aging: you die at 5)
 '''
 
+'''
+Things to add:
+On a result of 10-17 (but not 13), gain 1 aging point
+On a result of 18-21, gain 2 aging points
+If aging points >= (decrepitude +1) x 5, increase decrepitude by 1
+Whenever decrepitude increases, reset aging points to 0
+'''
+
 import random
 import math
 
@@ -36,11 +44,21 @@ def multiply_roll(multiplier):
 def aging(modifier):
     age = 34
     decrepitude = 0
+    aging_points = 0
     while decrepitude < 5:
         age += 1
         aging_roll = stress_roll() + math.ceil(age/10) - modifier
         if aging_roll == 13 or aging_roll >= 22:
             decrepitude += 1
+            aging_points = 0
+        elif aging_roll >= 10
+            aging_points += 1
+            if aging_roll >= 18:
+                aging_points += 1
+            if aging_points >= ((decrepitude + 1) * 5):
+                decrepitude += 1
+                aging_points = 0
+                
     return age
 
 # Right now I'm not using this.
